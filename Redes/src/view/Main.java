@@ -22,7 +22,7 @@ public class Main
     {
         String[] opcs = {"IP", "Ping", "Sair"};
         return JOptionPane.showOptionDialog(
-            null, "Selecione a opção desejada", "Processos",
+            null, "Selecione a opção desejada", "Redes",
             JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
             opcs, opcs[2]);
     }
