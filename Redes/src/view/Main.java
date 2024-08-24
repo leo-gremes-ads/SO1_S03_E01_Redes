@@ -12,7 +12,7 @@ public class Main
         do {
             opc = menu();
             if (opc == 0)
-                continue;
+                redes.ip();
             if (opc == 1)
                 redes.ping();            
         } while (opc != 2);
