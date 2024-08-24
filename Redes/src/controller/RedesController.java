@@ -29,6 +29,7 @@ public class RedesController
             BufferedReader buffer = new BufferedReader(procOut);
             String line = buffer.readLine();
             String name = null;
+            System.out.println("---------- Adaptadores de Rede com IPv4 ---------");
             if (os().contains("Windows")) {
                 while (line != null) {
                     if (line.length() > 0 && line.charAt(0) >= 33 && line.charAt(0) <= 126)
@@ -50,6 +51,7 @@ public class RedesController
                     line = buffer.readLine();                    
                 }
             }
+            System.out.println("-------------------------------------------------");
             buffer.close();
             procOut.close();
         } catch (Exception e) {
@@ -70,13 +72,24 @@ public class RedesController
             InputStreamReader procOut = new InputStreamReader(p.getInputStream());
             BufferedReader buffer = new BufferedReader(procOut);
             String line = buffer.readLine();
+            int bar = 0;
+            System.out.println("---------- Ping em www.gooogle.com.br ----------");
             if (os().contains("Windows")) {
                 while (line != null) {
                     if (line.contains("ms")) {
                         if (!line.contains("TTL"))
                             System.out.println("\nPing médio: " + line.split(",")[2].split(" = ")[1]);
-                        else
-                            System.out.print(".");
+                        else {
+                            System.out.print("\r[");
+                            for (int i = 0; i < 10; i++) {
+                                if (i <= bar)
+                                    System.out.print("#");
+                                else
+                                    System.out.print("-");
+                            }
+                            System.out.print("]");
+                            bar++;
+                        }
                     }
                     line = buffer.readLine();
                 }
@@ -85,12 +98,22 @@ public class RedesController
                     if (line.contains("ms")) {
                         if (line.contains("rtt"))
                             System.out.println("\nPing médio: " + line.split("/")[4] + "ms");
-                        else
-                            System.out.print(".");
+                        else {
+                            System.out.print("\r[");
+                            for (int i = 0; i < 10; i++) {
+                                if (i <= bar)
+                                    System.out.print("#");
+                                else
+                                    System.out.print("-");
+                            }
+                            System.out.print("]");
+                            bar++;
+                        }
                     }
                     line = buffer.readLine();
                 }
             }
+            System.out.println("------------------------------------------------");
             procOut.close();
             buffer.close();
         } catch (Exception e) {
