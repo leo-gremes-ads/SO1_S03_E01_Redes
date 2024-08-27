@@ -29,23 +29,34 @@ public class RedesController
             BufferedReader buffer = new BufferedReader(procOut);
             String line = buffer.readLine();
             String name = null;
+            boolean namePrinted = false;
             System.out.println("---------- Adaptadores de Rede com IPv4 (inet6) ---------");
             if (os().contains("Windows")) {
                 while (line != null) {
-                    if (line.length() > 0 && line.charAt(0) >= 33 && line.charAt(0) <= 126)
+                    if (line.length() > 0 && line.charAt(0) >= 33 && line.charAt(0) <= 126) {
                         name = line;
+                        namePrinted = false;
+                    }
                     if (line.contains("IPv4")) {
-                        System.out.println(name);
+                        if (!namePrinted) {
+                            System.out.println(name);
+                            namePrinted = true;
+                        }
                         System.out.println(line + "\n");
                     }
                     line = buffer.readLine();                    
                 }
             } else {
                 while (line != null) {
-                    if (line.charAt(0) >= 33 && line.charAt(0) <= 126)
+                    if (line.charAt(0) >= 33 && line.charAt(0) <= 126) {
                         name = line;
+                        namePrinted = false;
+                    }
                     if (line.contains("inet6")) {
-                        System.out.println(name);
+                        if (!namePrinted) {
+                            System.out.println(name);
+                            namePrinted = true;
+                        }
                         System.out.println(line + "\n");
                     }
                     line = buffer.readLine();                    
